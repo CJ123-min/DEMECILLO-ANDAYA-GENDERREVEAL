@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="reveal.css">
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Freckle+Face&family=Fredoka:wdth,wght@99,300..700&family=Pacifico&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Reveal</title>
+</head>
+<body>
+
+  <div class="countdown" id="countText">Boy</div>
+
+  <div class="reveal" id="reveal">
+    <div class="reveal-text" id="revealText">BOY</div>
+    <img src="SIR!.png" alt="Reveal Image" id="revealImage">
+  </div>
+
+<!-- CLOUD OVERLAY -->
+<div id="cloudOverlay"></div>
+
+
+<script>
+  const text = document.getElementById("countText");
+  const reveal = document.getElementById("reveal");
+  const revealText = document.getElementById("revealText");
+  const revealImage = document.getElementById("revealImage");
+  const body = document.body;
+
+  // Config for confetti explosion
+  const burstConfig = {
+    amount: 100,      // Number of pieces
+    minSize: 20,      // Min width
+    maxSize: 30,      // Max width
+  };
+
+  // Random final gender
+  const finalGender = Math.random() < 0.5 ? "BOY" : "GIRL";
+
+  const sequence = [
+    { word: "Boy",  text: "#ffffff", bg: "#000000" },
+    { word: "Girl", text: "#000000", bg: "#ffffff" },
+    { word: "Boy",  text: "#9fd8ff", bg: "#ffd1dc" },
+    { word: "Girl", text: "#ffd1dc", bg: "#9fd8ff" },
+    { word: "Boy",  text: "#9fd8ff", bg: "#ffd1dc" },
+    { word: "Girl", text: "#ffd1dc", bg: "#9fd8ff" }
+  ];
+
+  let step = 0;
+
+  const interval = setInterval(() => {
+    const current = sequence[step];
+    text.textContent = current.word;
+    text.style.color = current.text;
+    body.style.background = current.bg;
+
+    step++;
+    if (step === sequence.length) {
+      clearInterval(interval);
+      finalizeReveal();
+    }
+  }, 1000);
+
+  function finalizeReveal() {
+    document.getElementById("cloudOverlay").classList.add("show");
+    body.style.background = finalGender === "BOY" ? "#9fd8ff" : "#ffd1dc";
+
+    text.style.display = "none";
+    reveal.style.display = "block";
+    revealText.textContent = finalGender;
+
+    revealText.classList.add("float");
+    revealImage.classList.add("float");
+
+    // Burst confetti with configured amount & size
+    launchConfettiBurst();
+
+    // Continuous confetti
+    setInterval(launchConfetti, 200);
+  }
+
+  function launchConfettiBurst() {
+    for (let i = 0; i < burstConfig.amount; i++) {
+      const x = Math.random() * window.innerWidth;
+      const y = window.innerHeight - 10; // bottom edge
+      createConfetti(x, y, true);
+    }
+  }
+
+  function launchConfetti() {
+    const x = Math.random() * window.innerWidth;
+    createConfetti(x, -10, false);
+  }
+
+  function createConfetti(x, y, burst) {
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+
+    const colors = ["#FFD700", "#1E90FF", "#FF0000", "#FFFFFF"];
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+    // Size based on burstConfig if burst, otherwise small random for falling
+    const size = burst
+      ? Math.random() * (burstConfig.maxSize - burstConfig.minSize) + burstConfig.minSize
+      : Math.random() * 8 + 6;
+
+    confetti.style.width = size + "px";
+    confetti.style.height = size * 0.4 + "px";
+
+    confetti.style.left = x + "px";
+    confetti.style.top = y + "px";
+
+    const rotate = Math.random() * 360;
+    confetti.style.transform = `rotate(${rotate}deg)`;
+
+    const duration = burst ? (1 + Math.random() * 0.7) : (3 + Math.random() * 3);
+
+    if (burst) {
+      const offsetX = (Math.random() - 0.5) * 200; // horizontal spray
+      const offsetY = - (Math.random() * 150 + 250); // vertical rise
+      confetti.style.animation = `burstMove ${duration}s forwards`;
+      confetti.style.setProperty("--offsetX", offsetX + "px");
+      confetti.style.setProperty("--offsetY", offsetY + "px");
+    } else {
+      confetti.style.animation = `fall ${duration}s linear forwards`;
+    }
+
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), duration * 1000);
+
+   
+  }
+</script>
+</body>
+</html>

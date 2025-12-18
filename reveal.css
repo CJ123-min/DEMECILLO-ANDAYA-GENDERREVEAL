@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Freckle+Face&family=Fredoka:wdth,wght@99,300..700&family=Pacifico&display=swap');
+.pacifico-regular {
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.freckle-face-regular {
+  font-family: "Freckle Face", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+}
+
+body{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  overflow: hidden;
+  transition: background 1s ease;
+}
+
+/* COUNTDOWN TEXT */
+.countdown{
+  font-size: 6rem;
+  letter-spacing: 8px;
+  animation: pulse 1s infinite;
+  transition: color 1s ease;
+  z-index: 3;
+  font-family: "Pacifico", cursive;
+}
+
+@keyframes pulse{
+  0%{ transform: scale(1); }
+  50%{ transform: scale(1.1); }
+  100%{ transform: scale(1); }
+}
+
+/* REVEAL */
+.reveal{
+  display: none;
+  position: relative;
+  text-align: center;
+  animation: popIn 0.9s ease forwards;
+}
+
+/* HUGE TEXT BEHIND IMAGE */
+.reveal-text{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40.5rem;
+  font-weight: bold;
+  letter-spacing: 14px;
+  color: rgba(255,255,255,0.45);
+  z-index: 1;
+  font-family: "Fredoka", sans-serif;
+}
+
+/* FLOATING ANIMATION */
+.float{
+  animation: floatMove 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatMove{
+  0%   { transform: translate(-50%, -50%) translateY(0px); }
+  50%  { transform: translate(-50%, -50%) translateY(-15px); }
+  100% { transform: translate(-50%, -50%) translateY(0px); }
+}
+
+.reveal img{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  max-width: 80vw;
+  z-index: 2;
+}
+
+/* POP IN ANIMATION */
+@keyframes popIn{
+  0%{ transform: scale(0); opacity: 0; }
+  100%{ transform: scale(1); opacity: 1; }
+}
+
+/* CONFETTI */
+.confetti{
+  position: absolute;
+  z-index: 4;
+  opacity: 0.9;
+  border-radius: 2px;
+}
+
+@keyframes fall{
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes burstMove {
+  0% {
+    transform: translate(0,0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--offsetX), var(--offsetY)) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* CLOUD OVERLAY – GUARANTEED FULL SCREEN */
+#cloudOverlay{
+  position: fixed;
+  inset: 0;
+
+  background-image: url("border.png"); /* YOUR IMAGE */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  z-index: 999999; /* above literally everything */
+  pointer-events: none;
+
+  opacity: 0;
+}
+
+/* SHOW WHEN REVEAL STARTS */
+#cloudOverlay.show{
+  opacity: 1;
+}
+
+/* ZOOM ANIMATION ON SHOW */
+#cloudOverlay.show {
+  opacity: 1;
+  transform: scale(1.05); /* subtle zoom */
+  transition: opacity 0.6s ease, transform 0.8s ease;
+}
