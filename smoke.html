@@ -112,36 +112,44 @@ h1 {
 }
 
 /* ===== Confetti ===== */
-.confetti-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 9999;
-}
+ .confetti-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 9999;
+    }
 
-.confetti {
-    position: absolute;
-    top: -10px;
-    opacity: 0.9;
-    animation: fall linear infinite;
-}
+    .confetti {
+        position: absolute;
+        top: -10px;
+        opacity: 0.9;
+        animation: fall linear infinite;
+    }
 
-.confetti:nth-child(1) { left: 5%; width: 10px; height: 6px; background: pink; border-radius: 50%; animation-duration: 4s; animation-delay: 0s; }
-.confetti:nth-child(2) { left: 15%; width: 8px; height: 8px; background: skyblue; border-radius: 0%; animation-duration: 5s; animation-delay: 0.5s; }
-/* ... add remaining confetti as needed ... */
+    /* Individual confetti styles */
+    .confetti:nth-child(1) { left: 5%; width: 10px; height: 6px; background: pink; border-radius: 50%; animation-duration: 4s; animation-delay: 0s; }
+    .confetti:nth-child(2) { left: 15%; width: 8px; height: 8px; background: skyblue; border-radius: 0%; animation-duration: 5s; animation-delay: 0.5s; }
+    .confetti:nth-child(3) { left: 25%; width: 12px; height: 6px; background: gold; border-radius: 25%; animation-duration: 3.5s; animation-delay: 1s; }
+    .confetti:nth-child(4) { left: 35%; width: 8px; height: 10px; background: purple; border-radius: 50%; animation-duration: 4.2s; animation-delay: 1.2s; }
+    .confetti:nth-child(5) { left: 45%; width: 10px; height: 10px; background: lightgreen; border-radius: 0%; animation-duration: 4.8s; animation-delay: 0.8s; }
+    .confetti:nth-child(6) { left: 55%; width: 6px; height: 8px; background: orange; border-radius: 25%; animation-duration: 3.7s; animation-delay: 1.5s; }
+    .confetti:nth-child(7) { left: 65%; width: 8px; height: 8px; background: cyan; border-radius: 50%; animation-duration: 5.2s; animation-delay: 1.8s; }
+    .confetti:nth-child(8) { left: 75%; width: 10px; height: 6px; background: magenta; border-radius: 50%; animation-duration: 4.5s; animation-delay: 2s; }
+    .confetti:nth-child(9) { left: 85%; width: 6px; height: 6px; background: lime; border-radius: 0%; animation-duration: 4s; animation-delay: 2.3s; }
+    .confetti:nth-child(10){ left: 95%; width: 8px; height: 10px; background: red; border-radius: 25%; animation-duration: 5s; animation-delay: 2.5s; }
 
-@keyframes fall {
-    0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; }
-    25% { transform: translateY(25vh) rotate(90deg) translateX(10px); }
-    50% { transform: translateY(50vh) rotate(180deg) translateX(-10px); }
-    75% { transform: translateY(75vh) rotate(270deg) translateX(5px); }
-    100% { transform: translateY(100vh) rotate(360deg) translateX(0); opacity: 0; }
-}
-
+    /* Fall animation with rotation and horizontal sway */
+    @keyframes fall {
+        0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; }
+        25% { transform: translateY(25vh) rotate(90deg) translateX(10px); }
+        50% { transform: translateY(50vh) rotate(180deg) translateX(-10px); }
+        75% { transform: translateY(75vh) rotate(270deg) translateX(5px); }
+        100% { transform: translateY(100vh) rotate(360deg) translateX(0); opacity: 0; }
+    }
 /* ===== Carousel Container ===== */
 .carousel-container {
     border: 5px solid white;
