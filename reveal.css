@@ -23,7 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 10;
+  z-index: 9999999;
 }
 
 .navbar ul {
@@ -186,4 +186,5 @@ body{
   transform: scale(1.05); /* subtle zoom */
   transition: opacity 0.6s ease, transform 0.8s ease;
 }
+
 
