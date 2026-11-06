@@ -121,13 +121,15 @@ a:hover{
 }
 
 .subtext1{
-  font-family: "Fredoka", sans-serif;
+  font-family: "Pacifico", cursive;
   text-align: center;
   font-weight: light;
   position: relative;
   top: -40px;
   padding: 5px 5px;
   border-radius: 50px;
+
+  color: rgb(154, 48, 143);
 }
 
 h4{
